@@ -9,7 +9,8 @@ from marshmallow import fields
 
 from conduit.exceptions import InvalidUsage
 from conduit.user.models import User
-from .models import Article, Tags, Comment
+from conduit.profile.models import followers_assoc
+from .models import Article, Tags, Comment, UserProfile
 from .serializers import (article_schema, articles_schema, comment_schema,
                           comments_schema)
 
@@ -116,7 +117,8 @@ def unfavorite_an_article(slug):
 @use_kwargs({'limit': fields.Int(), 'offset': fields.Int()})
 @marshal_with(articles_schema)
 def articles_feed(limit=20, offset=0):
-    return Article.query.join(current_user.profile.follows). \
+    return Article.query.join(UserProfile).join(followers_assoc, (followers_assoc.c.followed_by == Article.author_id)).\
+        filter(followers_assoc.c.follower == current_user.profile.id).\
         order_by(Article.createdAt.desc()).offset(offset).limit(limit).all()
 
 
