@@ -2,9 +2,9 @@ export CONDUIT_SECRET='AZXQohXmwH7h6V0pRBH4wez18toha9X0JPSdIQNfYn3Ryp'
 export FLASK_APP=/app/conduit-backend/autoapp.py
 export FLASK_DEBUG=0
 #CONNECTION-DATA
-export DB_USER=
-export DB_PASS=
-export DB_HOST=
-export DB_PORT=
-export DB_NAME=
+export DB_USER=REPLACE_DB_USER
+export DB_PASS=REPLACE_DB_PASS
+export DB_HOST=REPLACE_DB_HOST
+export DB_PORT=REPLACE_DB_PORT
+export DB_NAME=REPLACE_DB_NAME
 export DATABASE_URL=postgresql://$DB_USER:$DB_PASS@$DB_HOST:$DB_PORT/$DB_NAME
